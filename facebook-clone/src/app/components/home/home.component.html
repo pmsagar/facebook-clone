@@ -45,13 +45,13 @@
 
     <!-- Header right starts here -->
     <div class="home__header__right">
-      <div>
+      <div class="user-display">
         <!-- User Image -->
         <img
           alt=""
           mat-card-avatar
-          src="">
-        <span class="name">NAME HERE</span>
+          [src]="user?.avatar">
+        <span class="name">{{user?.firstName || 'Default User'}}</span>
       </div>
       <div>
         <mat-icon>add</mat-icon>
@@ -78,7 +78,7 @@
         <mat-icon [matMenuTriggerFor]="menu">expand_more</mat-icon>
         <mat-menu #menu="matMenu">
           <button mat-menu-item >
-            <mat-icon>exit_to_app</mat-icon> Logout
+            <mat-icon (click)="logout()">exit_to_app</mat-icon> Logout
           </button>
         </mat-menu>
       </div>
@@ -96,10 +96,10 @@
       <div class="inside">
         <div class="user-avatar">
           <img
-            alt=""
+            alt="{{user?.firstName}}"
             mat-card-avatar
-            src="">
-          <span class="name">USER NAME HERE</span>
+            [src]="user?.avatar">
+          <span class="name">{{user?.firstName}}  {{user?.lastName}}</span>
         </div>
         <div>
           <mat-icon> local_hospital</mat-icon>
@@ -153,7 +153,7 @@
             <img
               alt="avatar"
               class="avatar"
-              src="https://scontent.fdel8-1.fna.fbcdn.net/v/t1.0-1/cp0/p50x50/15078703_10211571832470683_2854551810050518303_n.jpg?_nc_cat=105&_nc_sid=7206a8&_nc_ohc=YSQBDLYrXHgAX_7KBWW&_nc_ht=scontent.fdel8-1.fna&oh=298837f1c1ebe1f884ce2525d31f39b1&oe=5F6F741A">
+              src="assets/user-avatar.jpg">
             <span class="card-name">Mani Sagar Pratha</span>
           </mat-card-content>
         </mat-card>
@@ -169,7 +169,7 @@
           <mat-card-header class="post-message-header"
                            style="padding-bottom: 20px; border-bottom: 1px solid lightgray;">
             <img
-              alt=""
+              alt="{{user?.firstName}}"
               mat-card-avatar
               [src]="user?.avatar">
             <form #form="ngForm" (ngSubmit)="postMessage(form)">
@@ -201,7 +201,7 @@
           <mat-card-header class="posts__header">
             <img alt="{{ p?.title }}" mat-card-avatar [src]="p?.avatar">
             <div class="posts__header__right">
-              <span>{{ p?.time?.seconds * 1000 | date:'shortTime' }}</span>
+              <span>{{ p?.time?.seconds * 1000 | date:'medium' }}</span>
               <h3>{{ p?.title }}</h3>
             </div>
           </mat-card-header>
